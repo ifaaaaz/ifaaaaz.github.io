@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -17,13 +16,20 @@ body {
     line-height: 1.6;
 }
 
-h1, h2 {
-    color: #58a6ff;
-}
-
 .header {
     text-align: center;
-    padding: 20px;
+    padding: 30px 0;
+}
+
+h1 {
+    color: #58a6ff;
+    margin-bottom: 5px;
+}
+
+h2 {
+    color: #58a6ff;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 5px;
 }
 
 .section {
@@ -32,9 +38,17 @@ h1, h2 {
 
 .card {
     background: #161b22;
-    padding: 15px;
+    padding: 20px;
     border-radius: 10px;
     margin-bottom: 15px;
+}
+
+.skills span {
+    display: inline-block;
+    background: #21262d;
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 20px;
 }
 
 a {
@@ -46,24 +60,21 @@ a:hover {
     text-decoration: underline;
 }
 
-.skills span {
-    display: inline-block;
-    background: #21262d;
-    padding: 8px 12px;
-    margin: 5px;
-    border-radius: 20px;
-}
-
 .button {
     display: inline-block;
-    padding: 10px 18px;
     background: #238636;
     color: white;
+    padding: 12px 20px;
     border-radius: 6px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background: #2ea043;
     text-decoration: none;
 }
 </style>
-
 </head>
 
 <body>
@@ -72,94 +83,97 @@ a:hover {
     <h1>Mohammed Ifaz M</h1>
     <h3>Aspiring Cybersecurity Analyst</h3>
 
-```
-<p>
-Riyadh, Saudi Arabia |
-<a href="mailto:ifazz550@gmail.com">ifazz550@gmail.com</a>
-</p>
+    <p>
+        Riyadh, Saudi Arabia |
+        <a href="mailto:ifazz550@gmail.com">ifazz550@gmail.com</a>
+    </p>
 
-<p>
-<a href="https://github.com/ifaaaaz">GitHub</a> |
-<a href="https://www.linkedin.com/in/ifazm">LinkedIn</a> |
-<a href="https://tryhackme.com/p/Ifaz4">TryHackMe</a>
-</p>
-```
+    <p>
+        <a href="https://github.com/ifaaaaz" target="_blank">GitHub</a> |
+        <a href="https://www.linkedin.com/in/ifazm" target="_blank">LinkedIn</a> |
+        <a href="https://tryhackme.com/p/Ifaz4" target="_blank">TryHackMe</a>
+    </p>
 
+    <a class="button" href="Mohammed_Ifaz_Resume.pdf" target="_blank">
+        Download Resume
+    </a>
 </div>
 
 <div class="section">
-<h2>About Me</h2>
+    <h2>About Me</h2>
 
-<p>
-BSc Computer Science graduate with a Diploma in Cybersecurity and hands-on experience in SOC monitoring, vulnerability assessment, penetration testing, and security operations. Passionate about threat detection, incident response, and continuous learning in cybersecurity.
-</p>
+    <p>
+        BSc Computer Science graduate with a Diploma in Cybersecurity and hands-on
+        experience in SOC monitoring, vulnerability assessment, penetration testing,
+        and security operations. Passionate about threat detection, incident response,
+        and continuous learning in cybersecurity.
+    </p>
 </div>
 
 <div class="section">
-<h2>Technical Skills</h2>
+    <h2>Technical Skills</h2>
 
-<div class="skills">
-<span>Wazuh</span>
-<span>Splunk</span>
-<span>Nmap</span>
-<span>Burp Suite</span>
-<span>Metasploit</span>
-<span>Hydra</span>
-<span>Linux</span>
-<span>Windows</span>
-<span>Python</span>
-<span>Networking</span>
-<span>OWASP Top 10</span>
-<span>Vulnerability Assessment</span>
-</div>
-</div>
-
-<div class="section">
-<h2>Cybersecurity Projects</h2>
-
-<div class="card">
-<h3>Wazuh SOC Lab</h3>
-<p>
-Built a SOC lab using Wazuh SIEM, Ubuntu, Windows 11, and Kali Linux. Simulated attacks using Nmap and Hydra and investigated security alerts.
-</p>
-</div>
-
-<div class="card">
-<h3>DVWA Vulnerability Assessment</h3>
-<p>
-Performed web application security testing and identified SQL Injection, Command Injection, and XSS vulnerabilities.
-</p>
-</div>
-
-<div class="card">
-<h3>SME Penetration Testing Lab</h3>
-<p>
-Conducted reconnaissance, vulnerability assessment, and exploitation simulations using Nmap, Nikto, and Metasploit.
-</p>
-</div>
-
+    <div class="skills">
+        <span>Wazuh</span>
+        <span>Splunk</span>
+        <span>Nmap</span>
+        <span>Burp Suite</span>
+        <span>Metasploit</span>
+        <span>Hydra</span>
+        <span>Linux</span>
+        <span>Windows</span>
+        <span>Python</span>
+        <span>Networking</span>
+        <span>OWASP Top 10</span>
+        <span>Vulnerability Assessment</span>
+    </div>
 </div>
 
 <div class="section">
-<h2>Certifications</h2>
+    <h2>Cybersecurity Projects</h2>
 
-<ul>
-<li>Google Cybersecurity Professional Certificate</li>
-<li>CEH Training</li>
-<li>CCNA Training</li>
-</ul>
+    <div class="card">
+        <h3>Wazuh SOC Lab</h3>
+        <p>
+            Built a Security Operations Center lab using Wazuh SIEM, Ubuntu,
+            Windows 11, and Kali Linux. Simulated Nmap scans and Hydra SSH
+            brute-force attacks and investigated security alerts.
+        </p>
+    </div>
 
+    <div class="card">
+        <h3>DVWA Vulnerability Assessment</h3>
+        <p>
+            Performed web application security testing on DVWA and identified
+            SQL Injection, Command Injection, and Cross-Site Scripting (XSS)
+            vulnerabilities.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>SME Penetration Testing Lab</h3>
+        <p>
+            Conducted reconnaissance, vulnerability assessment, and exploitation
+            simulations using Nmap, Nikto, and Metasploit in a controlled lab
+            environment.
+        </p>
+    </div>
 </div>
 
 <div class="section">
-<h2>Resume</h2>
+    <h2>Certifications</h2>
 
-<p>
-Upload your resume PDF to this repository and replace the link below.
-</p>
+    <ul>
+        <li>Google Cybersecurity Professional Certificate</li>
+        <li>CEH Training</li>
+        <li>CCNA Training</li>
+    </ul>
+</div>
 
-<a class="button" href="#">Download Resume</a>
+<div class="section">
+    <h2>Languages</h2>
 
+    <p>English • Hindi • Arabic • Malayalam</p>
 </div>
 
 </body>
