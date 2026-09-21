@@ -3,25 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="description" content="Mohammed Ifaz M | Cybersecurity Analyst, SOC Analyst and Penetration Tester">
+<meta name="author" content="Mohammed Ifaz M">
 <title>Mohammed Ifaz M | Cybersecurity Portfolio</title>
 
-<meta name="description"
-      content="Mohammed Ifaz M | Cybersecurity Analyst, SOC Analyst and Penetration Tester">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 :root {
-    --bg: #070707;
-    --panel: #101010;
-    --panel-light: #151515;
-    --text: #f4f4f2;
-    --muted: #999b9d;
-    --line: #252525;
-    --accent: #d8ff45;
-    --accent-dark: #b8df30;
-    --white: #ffffff;
-    --max-width: 1180px;
+    --bg: #07100e;
+    --bg-soft: #0b1714;
+    --card: rgba(16, 30, 26, 0.72);
+    --card-solid: #0f1d19;
+    --border: rgba(154, 205, 190, 0.14);
+    --border-hover: rgba(135, 225, 199, 0.35);
+
+    --text: #f1f7f4;
+    --text-soft: #b7c8c1;
+    --muted: #80948d;
+
+    --accent: #77e0bd;
+    --accent-light: #a9f2d8;
+    --accent-dark: #3bb58e;
+
+    --blue: #82b8ff;
+    --purple: #bd9cff;
+
+    --max: 1200px;
+    --radius: 22px;
+    --transition: 0.3s ease;
 }
 
 * {
@@ -32,21 +44,27 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px;
 }
 
 body {
-    font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    background: var(--bg);
+    background:
+        radial-gradient(circle at 80% 10%, rgba(83, 184, 150, 0.09), transparent 28%),
+        radial-gradient(circle at 10% 40%, rgba(66, 130, 255, 0.05), transparent 25%),
+        var(--bg);
     color: var(--text);
+    font-family: "DM Sans", sans-serif;
     line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+::selection {
+    background: var(--accent);
+    color: #06100d;
 }
 
 a {
@@ -54,42 +72,89 @@ a {
     text-decoration: none;
 }
 
+button {
+    font: inherit;
+}
+
 .container {
-    width: min(calc(100% - 42px), var(--max-width));
+    width: min(100% - 40px, var(--max));
     margin: auto;
 }
 
+/* =========================
+   BACKGROUND
+========================= */
+
+.grid-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+    opacity: .25;
+    background-image:
+        linear-gradient(rgba(119, 224, 189, .025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(119, 224, 189, .025) 1px, transparent 1px);
+    background-size: 70px 70px;
+}
+
+.glow {
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: -1;
+    opacity: .08;
+}
+
+.glow-one {
+    top: 10%;
+    right: -200px;
+    background: var(--accent);
+}
+
+.glow-two {
+    bottom: 10%;
+    left: -250px;
+    background: #5d8fff;
+}
 
 /* =========================
    NAVIGATION
 ========================= */
 
-.nav {
+.nav-wrap {
     position: fixed;
-    top: 0;
+    top: 18px;
     left: 0;
     right: 0;
-
-    z-index: 100;
-
-    background: rgba(7, 7, 7, 0.86);
-    backdrop-filter: blur(18px);
-
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    z-index: 1000;
+    padding: 0 20px;
 }
 
-.nav-inner {
-    height: 76px;
-
+.navbar {
+    max-width: 1100px;
+    margin: auto;
+    height: 68px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 10px 0 20px;
+
+    background: rgba(7, 16, 14, .78);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    backdrop-filter: blur(22px);
+    box-shadow: 0 15px 50px rgba(0,0,0,.18);
 }
 
 .logo {
-    font-size: 1.05rem;
-    font-weight: 900;
-    letter-spacing: 0.08em;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -.5px;
+    white-space: nowrap;
 }
 
 .logo span {
@@ -98,21 +163,42 @@ a {
 
 .nav-links {
     display: flex;
-    gap: 28px;
+    align-items: center;
+    gap: 5px;
+    list-style: none;
 }
 
 .nav-links a {
-    color: #999;
-    font-size: 0.78rem;
+    padding: 10px 15px;
+    border-radius: 12px;
+    color: var(--text-soft);
+    font-size: 13px;
     font-weight: 600;
-
-    transition: 0.2s ease;
+    transition: var(--transition);
 }
 
-.nav-links a:hover {
-    color: var(--accent);
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--text);
+    background: rgba(119, 224, 189, .09);
 }
 
+.nav-cta {
+    background: var(--accent) !important;
+    color: #06100d !important;
+    margin-left: 6px;
+}
+
+.menu-btn {
+    display: none;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+}
 
 /* =========================
    HERO
@@ -120,249 +206,247 @@ a {
 
 .hero {
     min-height: 100vh;
-
-    padding: 150px 0 90px;
-
     display: flex;
     align-items: center;
+    padding: 150px 0 90px;
 }
 
 .hero-grid {
     display: grid;
-
-    grid-template-columns:
-        1.2fr
-        0.8fr;
-
-    gap: 65px;
-
+    grid-template-columns: 1.15fr .85fr;
+    gap: 70px;
     align-items: center;
 }
 
-.kicker {
-    display: flex;
+.status {
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-
-    color: var(--accent);
-
-    font-size: 0.7rem;
-    font-weight: 800;
-
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-
-    margin-bottom: 24px;
+    gap: 9px;
+    padding: 7px 13px;
+    border: 1px solid rgba(119, 224, 189, .2);
+    background: rgba(119, 224, 189, .05);
+    border-radius: 100px;
+    color: var(--accent-light);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 26px;
 }
 
-.kicker i {
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
+.status-dot {
+    width: 7px;
+    height: 7px;
     background: var(--accent);
-
-    box-shadow:
-        0 0 15px rgba(216,255,69,0.7);
+    border-radius: 50%;
+    box-shadow: 0 0 14px var(--accent);
 }
 
-h1 {
-    font-size: clamp(4rem, 8vw, 8rem);
-
-    line-height: 0.84;
-
-    letter-spacing: -0.075em;
-
-    font-weight: 900;
+.hero h1 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(54px, 7vw, 94px);
+    line-height: .94;
+    letter-spacing: -5px;
+    max-width: 850px;
 }
 
-h1 em {
-    font-style: normal;
+.hero h1 .soft {
+    color: #d5e2dd;
+}
+
+.hero h1 .accent {
     color: var(--accent);
 }
 
 .hero-role {
-    margin-top: 28px;
-
-    font-size:
-        clamp(1.1rem, 2vw, 1.5rem);
-
-    font-weight: 700;
-
-    color: #dddddd;
-}
-
-.hero-copy {
-    max-width: 670px;
-
-    color: var(--muted);
-
-    margin-top: 17px;
-
-    font-size: 1rem;
-}
-
-.actions {
     display: flex;
     flex-wrap: wrap;
-
-    gap: 11px;
-
-    margin-top: 30px;
+    gap: 9px;
+    margin: 30px 0 22px;
 }
 
-.btn {
-    padding: 12px 17px;
-
-    border: 1px solid #303030;
-
-    border-radius: 7px;
-
-    font-size: 0.8rem;
-    font-weight: 800;
-
-    transition:
-        0.2s ease;
+.role {
+    color: var(--text-soft);
+    border: 1px solid var(--border);
+    padding: 7px 11px;
+    border-radius: 9px;
+    font-size: 12px;
 }
 
-.btn:hover {
-    border-color: var(--accent);
-
-    transform:
-        translateY(-2px);
-}
-
-.btn-main {
-    background: var(--accent);
-
-    color: #080808;
-
-    border-color: var(--accent);
-}
-
-.btn-main:hover {
-    background: var(--accent-dark);
-}
-
-
-/* =========================
-   HERO VISUAL
-========================= */
-
-.visual {
-    height: 470px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    border:
-        1px solid var(--line);
-
-    background:
-        linear-gradient(
-            145deg,
-            #171717,
-            #090909
-        );
-}
-
-.visual::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent 49.8%,
-            rgba(216,255,69,0.09) 50%,
-            transparent 50.2%
-        ),
-        linear-gradient(
-            0deg,
-            transparent 49.8%,
-            rgba(216,255,69,0.07) 50%,
-            transparent 50.2%
-        );
-
-    background-size:
-        70px 70px;
-}
-
-.visual-ring {
-    position: absolute;
-
-    width: 290px;
-    height: 290px;
-
-    border:
-        1px solid
-        rgba(216,255,69,0.35);
-
-    border-radius: 50%;
-
-    left: 50%;
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    box-shadow:
-        0 0 80px
-        rgba(216,255,69,0.06);
-}
-
-.visual-ring::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 35px;
-
-    border:
-        1px dashed
-        rgba(216,255,69,0.32);
-
-    border-radius: 50%;
-}
-
-.visual-center {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    font-size: 5rem;
-
-    font-weight: 900;
-
-    letter-spacing: -0.1em;
-
-    color: var(--accent);
-}
-
-.visual-label {
-    position: absolute;
-
-    left: 22px;
-    bottom: 20px;
-
-    color: #777;
-
-    font-family: monospace;
-
-    font-size: 0.7rem;
-
+.hero-description {
+    max-width: 650px;
+    color: var(--text-soft);
+    font-size: 17px;
     line-height: 1.8;
 }
 
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 47px;
+    padding: 0 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #06100d;
+    border-color: var(--accent);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(119,224,189,.18);
+}
+
+.btn-secondary {
+    color: var(--text);
+    background: rgba(255,255,255,.025);
+}
+
+.btn-secondary:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+}
+
+/* HERO VISUAL */
+
+.hero-visual {
+    position: relative;
+    min-height: 480px;
+    display: grid;
+    place-items: center;
+}
+
+.security-orb {
+    width: 330px;
+    height: 330px;
+    border-radius: 50%;
+    border: 1px solid rgba(119,224,189,.25);
+    display: grid;
+    place-items: center;
+    position: relative;
+    box-shadow:
+        0 0 80px rgba(119,224,189,.07),
+        inset 0 0 60px rgba(119,224,189,.035);
+}
+
+.security-orb::before,
+.security-orb::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(119,224,189,.12);
+}
+
+.security-orb::before {
+    inset: 28px;
+}
+
+.security-orb::after {
+    inset: 72px;
+}
+
+.orb-core {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    background: rgba(119,224,189,.08);
+    border: 1px solid rgba(119,224,189,.32);
+    display: grid;
+    place-items: center;
+    color: var(--accent);
+    font-family: "Space Grotesk";
+    font-size: 28px;
+    font-weight: 700;
+    box-shadow: 0 0 45px rgba(119,224,189,.12);
+}
+
+.orbit {
+    position: absolute;
+    border: 1px dashed rgba(119,224,189,.15);
+    border-radius: 50%;
+    animation: rotate 18s linear infinite;
+}
+
+.orbit.one {
+    inset: -25px;
+}
+
+.orbit.two {
+    inset: 48px;
+    animation-duration: 12s;
+    animation-direction: reverse;
+}
+
+.orbit span {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+}
+
+.orbit.one span {
+    top: 16%;
+    right: 8%;
+}
+
+.orbit.two span {
+    bottom: 12%;
+    left: 10%;
+}
+
+@keyframes rotate {
+    to { transform: rotate(360deg); }
+}
+
+.float-card {
+    position: absolute;
+    padding: 13px 15px;
+    border-radius: 13px;
+    background: rgba(13,27,23,.85);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 40px rgba(0,0,0,.2);
+    font-size: 11px;
+    color: var(--text-soft);
+}
+
+.float-card strong {
+    display: block;
+    color: var(--accent-light);
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.float-one {
+    top: 65px;
+    right: 0;
+}
+
+.float-two {
+    bottom: 80px;
+    left: 5px;
+}
+
+.float-three {
+    bottom: 20px;
+    right: 40px;
+}
 
 /* =========================
    SECTIONS
@@ -374,751 +458,905 @@ section {
 
 .section-top {
     display: flex;
-
+    align-items: flex-end;
     justify-content: space-between;
-
     gap: 30px;
-
-    align-items: end;
-
-    border-bottom:
-        1px solid var(--line);
-
-    padding-bottom: 20px;
+    margin-bottom: 45px;
 }
 
 .eyebrow {
     color: var(--accent);
-
-    font-size: 0.68rem;
-
-    font-weight: 900;
-
-    letter-spacing: 0.18em;
-
+    font-size: 11px;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
 .section-title {
-    font-size:
-        clamp(2.5rem, 5vw, 5rem);
-
-    line-height: 0.95;
-
-    letter-spacing: -0.06em;
-
-    margin-top: 8px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(34px, 5vw, 58px);
+    letter-spacing: -2.5px;
+    line-height: 1;
 }
 
-.section-note {
-    max-width: 390px;
-
+.section-description {
+    max-width: 500px;
     color: var(--muted);
-
-    font-size: 0.85rem;
+    font-size: 14px;
 }
-
 
 /* =========================
    ABOUT
 ========================= */
 
-.insight {
+.about-grid {
     display: grid;
-
-    grid-template-columns:
-        1fr
-        1fr;
-
-    gap: 16px;
-
-    margin-top: 28px;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
 }
 
-.big-card,
-.small-card,
-.project,
-.skill,
-.cert,
-.timeline-item,
-.contact-box,
-.stat {
-    border:
-        1px solid var(--line);
-
-    background: var(--panel);
-
-    border-radius: 10px;
+.about-card {
+    border: 1px solid var(--border);
+    background: linear-gradient(145deg, rgba(20,38,33,.8), rgba(10,20,17,.65));
+    border-radius: var(--radius);
+    padding: 32px;
 }
 
-.big-card {
-    padding: 36px;
-
-    min-height: 330px;
+.about-card.large {
+    min-height: 320px;
 }
 
-.big-card h3 {
-    font-size: 1.55rem;
-
-    margin-bottom: 17px;
+.about-card h3 {
+    font-family: "Space Grotesk";
+    font-size: 22px;
+    margin-bottom: 18px;
 }
 
-.big-card p {
-    color: var(--muted);
-
-    max-width: 650px;
+.about-card p {
+    color: var(--text-soft);
+    font-size: 15px;
+    line-height: 1.9;
 }
 
-.small-stack {
+.focus-list {
     display: grid;
-
-    gap: 16px;
+    gap: 13px;
+    margin-top: 22px;
 }
 
-.small-card {
-    padding: 25px;
+.focus-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: var(--text-soft);
+    font-size: 13px;
 }
 
-.small-card strong {
-    font-size: 1.8rem;
-
-    color: var(--accent);
-
-    display: block;
+.focus-item span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(119,224,189,.45);
 }
-
-.small-card span {
-    color: var(--muted);
-
-    font-size: 0.8rem;
-}
-
-
-/* =========================
-   STATS
-========================= */
 
 .stats {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 12px;
-
-    margin-top: 28px;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
 
 .stat {
-    border-radius: 0;
-
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-
-    padding: 20px 5px;
-
-    background: transparent;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: rgba(255,255,255,.018);
 }
 
 .stat-number {
-    font-size: 2.2rem;
-
-    font-weight: 900;
-
+    font-family: "Space Grotesk";
+    font-size: 38px;
+    font-weight: 700;
     color: var(--accent);
-
-    letter-spacing: -0.05em;
 }
 
 .stat-label {
-    display: block;
-
     color: var(--muted);
-
-    font-size: 0.75rem;
-
-    margin-top: 3px;
+    font-size: 12px;
+    margin-top: 4px;
 }
-
 
 /* =========================
    PROJECTS
 ========================= */
 
-.projects {
+.project-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 14px;
-
-    margin-top: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
 }
 
-.project {
-    padding: 0;
-
-    overflow: hidden;
-
-    transition:
-        0.25s ease;
-}
-
-.project:hover {
-    transform:
-        translateY(-6px);
-
-    border-color:
-        #414141;
-}
-
-.project-art {
-    height: 190px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    background: #0c0c0c;
-
-    border-bottom:
-        1px solid var(--line);
-}
-
-.project-art::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 20px;
-
+.project-card {
+    min-height: 390px;
+    padding: 27px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(216,255,69,0.08)
-            0 1px,
-            transparent 1px 15px
-        );
-
-    transform:
-        skewY(-8deg);
+        linear-gradient(145deg, rgba(19,37,32,.9), rgba(8,17,14,.8));
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
-.project-art span {
+.project-card::before {
+    content: "";
     position: absolute;
-
-    left: 22px;
-    top: 20px;
-
-    color: var(--accent);
-
-    font:
-        700 0.7rem monospace;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    top: -100px;
+    right: -90px;
+    background: rgba(119,224,189,.07);
+    filter: blur(20px);
 }
 
-.project-art strong {
-    position: absolute;
-
-    right: 20px;
-    bottom: 18px;
-
-    font:
-        900 2.4rem monospace;
-
-    color: #222;
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-hover);
+    box-shadow: 0 25px 60px rgba(0,0,0,.22);
 }
 
-.project-body {
-    padding: 24px;
-}
-
-.project-body h3 {
-    font-size: 1.15rem;
-}
-
-.project-body p {
+.project-number {
     color: var(--muted);
+    font-family: "Space Grotesk";
+    font-size: 12px;
+    margin-bottom: 35px;
+}
 
-    font-size: 0.82rem;
+.project-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(119,224,189,.18);
+    background: rgba(119,224,189,.07);
+    color: var(--accent);
+    font-size: 20px;
+    margin-bottom: 22px;
+}
 
-    margin-top: 9px;
+.project-card h3 {
+    font-family: "Space Grotesk";
+    font-size: 23px;
+    line-height: 1.15;
+    margin-bottom: 13px;
+}
+
+.project-card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
 }
 
 .tags {
     display: flex;
-
     flex-wrap: wrap;
-
-    gap: 6px;
-
-    margin-top: 19px;
+    gap: 7px;
+    margin-top: auto;
+    padding-top: 25px;
 }
 
 .tag {
-    font-size: 0.66rem;
-
-    padding: 5px 7px;
-
-    background: #181818;
-
-    color: #aaa;
-
-    border:
-        1px solid #242424;
-
-    border-radius: 4px;
+    color: #a8bcb5;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.025);
+    padding: 6px 9px;
+    border-radius: 7px;
+    font-size: 10px;
 }
 
+.view-project {
+    margin-top: 19px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* =========================
+   PROJECT MODAL
+========================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(2,7,6,.78);
+    backdrop-filter: blur(18px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease;
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-box {
+    width: min(900px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid var(--border-hover);
+    border-radius: 25px;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(119,224,189,.08), transparent 30%),
+        #0b1714;
+    box-shadow: 0 30px 100px rgba(0,0,0,.5);
+    transform: translateY(20px);
+    transition: .3s ease;
+}
+
+.modal.active .modal-box {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: 30px 32px 25px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.modal-close {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.modal-close:hover {
+    background: rgba(255,255,255,.05);
+}
+
+.modal-content {
+    padding: 30px 32px 35px;
+}
+
+.modal-content h4 {
+    font-family: "Space Grotesk";
+    color: var(--accent);
+    margin: 28px 0 9px;
+    font-size: 14px;
+}
+
+.modal-content h4:first-child {
+    margin-top: 0;
+}
+
+.modal-content p,
+.modal-content li {
+    color: var(--text-soft);
+    font-size: 14px;
+    line-height: 1.85;
+}
+
+.modal-content ul {
+    padding-left: 20px;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.detail-box {
+    padding: 16px;
+    border-radius: 13px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.02);
+}
+
+.detail-box small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.detail-box strong {
+    color: var(--text);
+    font-size: 12px;
+}
 
 /* =========================
    SKILLS
 ========================= */
 
-.skills {
+.skills-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 12px;
-
-    margin-top: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
 }
 
-.skill {
+.skill-card {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.018);
+    border-radius: 18px;
     padding: 25px;
+    transition: var(--transition);
 }
 
-.skill-number {
+.skill-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+}
+
+.skill-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.skill-head-icon {
+    width: 39px;
+    height: 39px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: rgba(119,224,189,.07);
     color: var(--accent);
-
-    font:
-        700 0.68rem monospace;
 }
 
-.skill h3 {
-    margin-top: 18px;
-
-    font-size: 1.1rem;
+.skill-head h3 {
+    font-family: "Space Grotesk";
+    font-size: 16px;
 }
 
-.skill p {
-    color: var(--muted);
-
-    font-size: 0.8rem;
-
-    margin-top: 8px;
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
+.skill-list span {
+    font-size: 11px;
+    color: var(--text-soft);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 7px 9px;
+}
 
 /* =========================
    CERTIFICATIONS
 ========================= */
 
-.certs {
+.cert-list {
     display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
     gap: 12px;
-
-    margin-top: 30px;
 }
 
 .cert {
-    padding: 21px;
-
-    display: flex;
-
-    gap: 15px;
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.015);
+    border-radius: 15px;
+    transition: var(--transition);
 }
 
-.cert-num {
+.cert:hover {
+    border-color: var(--border-hover);
+    transform: translateX(5px);
+}
+
+.cert-year {
     color: var(--accent);
-
-    font:
-        700 0.7rem monospace;
+    font-family: "Space Grotesk";
+    font-size: 12px;
 }
 
-.cert strong {
-    display: block;
-
-    font-size: 0.86rem;
+.cert h3 {
+    font-family: "Space Grotesk";
+    font-size: 14px;
 }
 
-.cert span {
-    display: block;
-
+.cert p {
     color: var(--muted);
-
-    font-size: 0.72rem;
-
+    font-size: 11px;
     margin-top: 3px;
 }
 
+.cert-badge {
+    color: var(--muted);
+    font-size: 10px;
+    border: 1px solid var(--border);
+    padding: 6px 9px;
+    border-radius: 7px;
+}
 
 /* =========================
-   EDUCATION / JOURNEY
+   JOURNEY
 ========================= */
 
-.timeline {
-    margin-top: 30px;
-
+.journey {
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
 
-    gap: 12px;
+.journey-card {
+    padding: 32px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(145deg, rgba(19,37,32,.7), rgba(8,17,14,.6));
+}
+
+.journey-card h3 {
+    font-family: "Space Grotesk";
+    font-size: 23px;
+    margin-bottom: 25px;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 25px;
+    border-left: 1px solid rgba(119,224,189,.2);
 }
 
 .timeline-item {
-    display: grid;
-
-    grid-template-columns:
-        150px 1fr;
-
-    padding: 25px;
+    position: relative;
+    margin-bottom: 27px;
 }
 
-.timeline-date {
-    color: var(--accent);
-
-    font:
-        700 0.72rem monospace;
+.timeline-item:last-child {
+    margin-bottom: 0;
 }
 
-.timeline-item h3 {
-    font-size: 1rem;
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    left: -29px;
+    top: 7px;
+    box-shadow: 0 0 12px rgba(119,224,189,.5);
 }
 
-.timeline-item p {
+.timeline-item strong {
+    font-family: "Space Grotesk";
+    font-size: 13px;
+}
+
+.timeline-item span {
+    display: block;
     color: var(--muted);
-
-    font-size: 0.8rem;
-
-    margin-top: 4px;
+    font-size: 11px;
+    margin-top: 2px;
 }
-
 
 /* =========================
    CONTACT
 ========================= */
 
-.contact {
-    padding-top: 30px;
-}
-
 .contact-box {
-    padding:
-        60px 35px;
-
-    text-align: center;
-
+    padding: 60px;
+    border: 1px solid var(--border);
+    border-radius: 28px;
     background:
-        linear-gradient(
-            145deg,
-            #151515,
-            #0b0b0b
-        );
+        radial-gradient(circle at 100% 0%, rgba(119,224,189,.1), transparent 35%),
+        linear-gradient(145deg, rgba(19,37,32,.75), rgba(8,17,14,.7));
+    text-align: center;
 }
 
 .contact-box h2 {
-    font-size:
-        clamp(3rem, 7vw, 6.5rem);
-
-    line-height: 0.85;
-
-    letter-spacing: -0.07em;
-}
-
-.contact-box h2 em {
-    color: var(--accent);
-
-    font-style: normal;
+    font-family: "Space Grotesk";
+    font-size: clamp(38px, 6vw, 70px);
+    letter-spacing: -3px;
+    line-height: 1;
 }
 
 .contact-box p {
-    color: var(--muted);
-
-    max-width: 560px;
-
-    margin:
-        18px auto;
+    max-width: 570px;
+    margin: 20px auto 28px;
+    color: var(--text-soft);
 }
 
 .contact-links {
     display: flex;
-
     justify-content: center;
-
-    gap: 9px;
-
     flex-wrap: wrap;
-
-    margin-top: 24px;
+    gap: 10px;
 }
-
 
 /* =========================
    FOOTER
 ========================= */
 
 footer {
-    border-top:
-        1px solid var(--line);
-
-    padding:
-        30px 0;
-
-    color: #666;
-
-    font-size: 0.7rem;
-
-    text-align: center;
+    padding: 35px 0;
+    border-top: 1px solid var(--border);
 }
 
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-inner p {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 17px;
+}
+
+.footer-links a {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+}
 
 /* =========================
-   MOBILE
+   SCROLL REVEAL
 ========================= */
 
-@media(max-width: 900px) {
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: .7s ease;
+}
 
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
     .hero-grid {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
 
-    .visual {
-        height: 360px;
+    .hero {
+        padding-top: 140px;
     }
 
-    .projects,
-    .skills {
-        grid-template-columns:
-            1fr 1fr;
+    .hero-visual {
+        min-height: 390px;
     }
 
-    .insight {
+    .project-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .about-grid,
+    .journey {
         grid-template-columns: 1fr;
-    }
-
-    .stats {
-        grid-template-columns:
-            repeat(2, 1fr);
     }
 }
 
-
-@media(max-width: 620px) {
+@media (max-width: 760px) {
 
     .container {
-        width:
-            calc(100% - 28px);
+        width: min(100% - 28px, var(--max));
+    }
+
+    .nav-wrap {
+        padding: 0 12px;
+    }
+
+    .navbar {
+        height: 62px;
+    }
+
+    .menu-btn {
+        display: grid;
+        place-items: center;
     }
 
     .nav-links {
-        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+        background: rgba(7,16,14,.96);
+        border: 1px solid var(--border);
+        border-radius: 17px;
+        backdrop-filter: blur(20px);
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: .25s ease;
     }
 
-    h1 {
-        font-size: 4rem;
+    .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
     }
 
-    .visual {
-        height: 300px;
+    .nav-links a {
+        display: block;
+        padding: 12px;
     }
 
-    .projects,
-    .skills,
-    .certs {
-        grid-template-columns: 1fr;
+    .nav-cta {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .hero {
+        padding-top: 125px;
+    }
+
+    .hero h1 {
+        font-size: clamp(47px, 14vw, 75px);
+        letter-spacing: -3px;
+    }
+
+    .hero-description {
+        font-size: 15px;
+    }
+
+    .hero-visual {
+        min-height: 340px;
+    }
+
+    .security-orb {
+        width: 250px;
+        height: 250px;
+    }
+
+    .float-card {
+        transform: scale(.85);
+    }
+
+    .float-one {
+        right: -10px;
+    }
+
+    .float-two {
+        left: -10px;
+    }
+
+    .float-three {
+        right: 0;
+    }
+
+    section {
+        padding: 80px 0;
     }
 
     .section-top {
         display: block;
     }
 
-    .section-note {
-        margin-top: 14px;
+    .section-description {
+        margin-top: 15px;
     }
 
-    .timeline-item {
+    .project-grid,
+    .skills-grid {
         grid-template-columns: 1fr;
+    }
 
-        gap: 7px;
+    .project-card {
+        min-height: 350px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .cert {
+        grid-template-columns: 55px 1fr;
+    }
+
+    .cert-badge {
+        display: none;
+    }
+
+    .contact-box {
+        padding: 40px 20px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
     }
 }
 
+@media (max-width: 450px) {
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .modal {
+        padding: 10px;
+    }
+
+    .modal-header,
+    .modal-content {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
 </style>
 </head>
 
-
 <body>
 
+<div class="grid-bg"></div>
+<div class="glow glow-one"></div>
+<div class="glow glow-two"></div>
 
 <!-- =========================
      NAVIGATION
 ========================= -->
 
-<nav class="nav">
+<div class="nav-wrap">
+    <nav class="navbar">
 
-<div class="container nav-inner">
+        <a href="#home" class="logo">
+            IFAZ<span>.</span>
+        </a>
 
-<a class="logo" href="#home">
-    IFAZ<span>.</span>
-</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open navigation">
+            ☰
+        </button>
 
-<div class="nav-links">
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact" class="nav-cta">Contact</a></li>
+        </ul>
 
-<a href="#about">
-    ABOUT
-</a>
-
-<a href="#projects">
-    PROJECTS
-</a>
-
-<a href="#skills">
-    SKILLS
-</a>
-
-<a href="#certifications">
-    CERTIFICATIONS
-</a>
-
-<a href="#contact">
-    CONTACT
-</a>
-
+    </nav>
 </div>
-
-</div>
-
-</nav>
-
-
-
-<main id="home">
-
 
 <!-- =========================
      HERO
 ========================= -->
 
+<main id="home">
+
 <section class="hero">
+    <div class="container">
+        <div class="hero-grid">
 
-<div class="container hero-grid">
+            <div class="hero-content reveal">
 
+                <div class="status">
+                    <span class="status-dot"></span>
+                    Available for opportunities
+                </div>
 
-<div>
+                <h1>
+                    MOHAMMED
+                    <span class="soft">IFAZ</span><span class="accent">.</span>
+                </h1>
 
-<div class="kicker">
+                <div class="hero-role">
+                    <span class="role">Cybersecurity Analyst</span>
+                    <span class="role">SOC Analyst</span>
+                    <span class="role">Penetration Tester</span>
+                </div>
 
-<i></i>
+                <p class="hero-description">
+                    Cybersecurity professional focused on threat detection,
+                    security monitoring, vulnerability assessment and practical
+                    defensive security. I build hands-on labs and security
+                    projects to turn concepts into real technical experience.
+                </p>
 
-OPEN TO ENTRY-LEVEL OPPORTUNITIES
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary">
+                        Explore My Work →
+                    </a>
 
-</div>
+                    <a href="mailto:ifazz550@gmail.com" class="btn btn-secondary">
+                        Let's Connect
+                    </a>
 
+                    <a href="https://github.com/ifaaaaz"
+                       target="_blank"
+                       class="btn btn-secondary">
+                        GitHub ↗
+                    </a>
+                </div>
 
-<h1>
+            </div>
 
-MOHAMMED
+            <div class="hero-visual reveal">
 
-<br>
+                <div class="security-orb">
 
-<em>IFAZ.</em>
+                    <div class="orbit one">
+                        <span></span>
+                    </div>
 
-</h1>
+                    <div class="orbit two">
+                        <span></span>
+                    </div>
 
+                    <div class="orb-core">
+                        IF
+                    </div>
 
-<div class="hero-role">
+                </div>
 
-Cybersecurity Analyst · SOC Analyst · Penetration Tester
+                <div class="float-card float-one">
+                    <strong>WAZUH</strong>
+                    Security Monitoring
+                </div>
 
-</div>
+                <div class="float-card float-two">
+                    <strong>39+</strong>
+                    TryHackMe Rooms
+                </div>
 
+                <div class="float-card float-three">
+                    <strong>10+</strong>
+                    CTF Machines
+                </div>
 
-<p class="hero-copy">
+            </div>
 
-B.Sc. Computer Science graduate with a Diploma in Cybersecurity.
-I build hands-on security labs, investigate alerts, assess
-vulnerabilities, and document what I learn.
-
-</p>
-
-
-<div class="actions">
-
-<a
-class="btn btn-main"
-href="Mohammed_Ifaz_Resume.pdf"
-target="_blank">
-
-DOWNLOAD RESUME ↗
-
-</a>
-
-
-<a
-class="btn"
-href="https://github.com/ifaaaaz"
-target="_blank">
-
-GITHUB ↗
-
-</a>
-
-
-<a
-class="btn"
-href="https://www.linkedin.com/in/ifazm"
-target="_blank">
-
-LINKEDIN ↗
-
-</a>
-
-</div>
-
-</div>
-
-
-
-<!-- HERO VISUAL -->
-
-<div class="visual">
-
-<div class="visual-ring"></div>
-
-
-<div class="visual-center">
-
-IF
-
-</div>
-
-
-<div class="visual-label">
-
-SECURITY LAB / MOHAMMED IFAZ
-<br>
-THREAT DETECTION
-<br>
-WEB SECURITY
-<br>
-PENETRATION TESTING
-
-</div>
-
-</div>
-
-
-</div>
-
+        </div>
+    </div>
 </section>
-
 
 
 <!-- =========================
@@ -1126,213 +1364,87 @@ PENETRATION TESTING
 ========================= -->
 
 <section id="about">
+    <div class="container">
 
-<div class="container">
+        <div class="section-top reveal">
+            <div>
+                <div class="eyebrow">01 / About</div>
+                <h2 class="section-title">Security-minded.<br>Always learning.</h2>
+            </div>
 
+            <p class="section-description">
+                A hands-on cybersecurity graduate building practical
+                experience through labs, security assessments and continuous
+                technical learning.
+            </p>
+        </div>
 
-<div class="section-top">
+        <div class="about-grid">
 
-<div>
+            <div class="about-card large reveal">
 
-<div class="eyebrow">
+                <h3>Who I am</h3>
 
-01 / THE SECURITY MINDSET
+                <p>
+                    I am Mohammed Ifaz M, a Computer Science graduate with a
+                    Diploma in Cybersecurity. My interests are focused on
+                    Security Operations, Threat Detection, Vulnerability
+                    Assessment and Penetration Testing.
+                </p>
 
-</div>
+                <div class="focus-list">
 
-<h2 class="section-title">
+                    <div class="focus-item">
+                        <span></span>
+                        Security monitoring and alert investigation
+                    </div>
 
-ABOUT ME
+                    <div class="focus-item">
+                        <span></span>
+                        Vulnerability assessment and web security
+                    </div>
 
-</h2>
+                    <div class="focus-item">
+                        <span></span>
+                        Network security and reconnaissance
+                    </div>
 
-</div>
+                    <div class="focus-item">
+                        <span></span>
+                        Linux, Windows and security tooling
+                    </div>
 
+                </div>
 
-<p class="section-note">
+            </div>
 
-A practical cybersecurity portfolio built around
-labs, testing, investigation and continuous learning.
+            <div class="stats reveal">
 
-</p>
+                <div class="stat">
+                    <div class="stat-number">39+</div>
+                    <div class="stat-label">TryHackMe Rooms</div>
+                </div>
 
-</div>
+                <div class="stat">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">CTF Machines</div>
+                </div>
 
+                <div class="stat">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">TryHackMe Badges</div>
+                </div>
 
+                <div class="stat">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Security Credentials</div>
+                </div>
 
-<div class="insight">
+            </div>
 
-
-<div class="big-card">
-
-<h3>
-
-Security is something I practice.
-
-</h3>
-
-
-<p>
-
-I am an entry-level cybersecurity professional with
-a B.Sc. in Computer Science and a Diploma in Cybersecurity.
-My hands-on work covers SOC monitoring, alert triage,
-vulnerability assessment and penetration testing through
-controlled labs and projects.
-
-I enjoy understanding how attacks work, how security
-controls detect them, and how findings can be documented
-clearly for remediation.
-
-</p>
-
-</div>
-
-
-
-<div class="small-stack">
-
-
-<div class="small-card">
-
-<strong>
-
-39
-
-</strong>
-
-<span>
-
-TryHackMe rooms completed
-
-</span>
-
-</div>
-
-
-
-<div class="small-card">
-
-<strong>
-
-TOP 8%
-
-</strong>
-
-<span>
-
-TryHackMe ranking with 8 skill badges
-
-</span>
-
-</div>
-
-
-
-<div class="small-card">
-
-<strong>
-
-10+
-
-</strong>
-
-<span>
-
-Boot-to-root / CTF machines rooted
-
-</span>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<div class="stats">
-
-
-<div class="stat">
-
-<div class="stat-number">
-
-16
-
-</div>
-
-<span class="stat-label">
-
-Wazuh correlated alerts investigated
-
-</span>
-
-</div>
-
-
-
-<div class="stat">
-
-<div class="stat-number">
-
-10
-
-</div>
-
-<span class="stat-label">
-
-DVWA hands-on test cases
-
-</span>
-
-</div>
-
-
-
-<div class="stat">
-
-<div class="stat-number">
-
-3
-
-</div>
-
-<span class="stat-label">
-
-Core vulnerability classes assessed
-
-</span>
-
-</div>
-
-
-
-<div class="stat">
-
-<div class="stat-number">
-
-2
-
-</div>
-
-<span class="stat-label">
-
-Academic qualifications
-
-</span>
-
-</div>
-
-
-</div>
-
-
-</div>
-
+        </div>
+    </div>
 </section>
-
 
 
 <!-- =========================
@@ -1340,233 +1452,119 @@ Academic qualifications
 ========================= -->
 
 <section id="projects">
+    <div class="container">
 
-<div class="container">
+        <div class="section-top reveal">
 
+            <div>
+                <div class="eyebrow">02 / Selected Work</div>
+                <h2 class="section-title">Projects that<br>show the work.</h2>
+            </div>
 
-<div class="section-top">
+            <p class="section-description">
+                Click any project to explore the objective, environment,
+                methodology, tools and security outcomes in detail.
+            </p>
 
-<div>
+        </div>
 
-<div class="eyebrow">
+        <div class="project-grid">
 
-02 / DIGITAL ARTIFACTS
+            <!-- PROJECT 1 -->
 
-</div>
+            <article class="project-card reveal"
+                     onclick="openProject('wazuh')">
 
-<h2 class="section-title">
+                <div class="project-number">01 / SOC</div>
 
-PROJECTS
+                <div class="project-icon">◉</div>
 
-</h2>
+                <h3>Real-Time Endpoint Monitoring</h3>
 
-</div>
+                <p>
+                    Built a practical Wazuh security monitoring environment
+                    for endpoint visibility, alert detection and MITRE ATT&CK
+                    based analysis.
+                </p>
 
+                <div class="tags">
+                    <span class="tag">Wazuh</span>
+                    <span class="tag">Windows</span>
+                    <span class="tag">Kali</span>
+                    <span class="tag">MITRE ATT&CK</span>
+                </div>
 
-<p class="section-note">
+                <div class="view-project">
+                    View full case study →
+                </div>
 
-Selected security labs showing practical work across
-blue-team monitoring and offensive security.
+            </article>
 
-</p>
 
-</div>
+            <!-- PROJECT 2 -->
 
+            <article class="project-card reveal"
+                     onclick="openProject('dvwa')">
 
+                <div class="project-number">02 / WEB SECURITY</div>
 
-<div class="projects">
+                <div class="project-icon">⌕</div>
 
+                <h3>DVWA Vulnerability Assessment</h3>
 
-<!-- PROJECT 1 -->
+                <p>
+                    Conducted a controlled web application security assessment
+                    covering common OWASP vulnerabilities and exploitation
+                    techniques.
+                </p>
 
-<article class="project">
+                <div class="tags">
+                    <span class="tag">Burp Suite</span>
+                    <span class="tag">SQLi</span>
+                    <span class="tag">XSS</span>
+                    <span class="tag">OWASP</span>
+                </div>
 
+                <div class="view-project">
+                    View full case study →
+                </div>
 
-<div class="project-art">
+            </article>
 
-<span>
 
-01 / SOC
+            <!-- PROJECT 3 -->
 
-</span>
+            <article class="project-card reveal"
+                     onclick="openProject('pentest')">
 
-<strong>
+                <div class="project-number">03 / PENTESTING</div>
 
-WZ
+                <div class="project-icon">⌁</div>
 
-</strong>
+                <h3>SME Penetration Testing Lab</h3>
 
-</div>
+                <p>
+                    Simulated an internal penetration testing workflow using
+                    reconnaissance, enumeration, vulnerability discovery and
+                    exploitation in a controlled lab.
+                </p>
 
+                <div class="tags">
+                    <span class="tag">Nmap</span>
+                    <span class="tag">Nikto</span>
+                    <span class="tag">Metasploit</span>
+                    <span class="tag">Linux</span>
+                </div>
 
-<div class="project-body">
+                <div class="view-project">
+                    View full case study →
+                </div>
 
-<h3>
+            </article>
 
-Wazuh SOC Lab
-
-</h3>
-
-
-<p>
-
-Deployed Wazuh SIEM, integrated a Windows 11 endpoint,
-simulated Nmap reconnaissance and Hydra SSH brute-force
-activity, investigated 16 correlated alerts, and mapped
-activity to MITRE ATT&CK.
-
-</p>
-
-
-<div class="tags">
-
-<span class="tag">WAZUH</span>
-
-<span class="tag">WINDOWS</span>
-
-<span class="tag">KALI</span>
-
-<span class="tag">NMAP</span>
-
-<span class="tag">HYDRA</span>
-
-<span class="tag">MITRE ATT&CK</span>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- PROJECT 2 -->
-
-<article class="project">
-
-
-<div class="project-art">
-
-<span>
-
-02 / WEB SECURITY
-
-</span>
-
-<strong>
-
-DV
-
-</strong>
-
-</div>
-
-
-<div class="project-body">
-
-<h3>
-
-DVWA Vulnerability Assessment
-
-</h3>
-
-
-<p>
-
-Performed 10 test cases across Command Injection,
-SQL Injection and Reflected XSS across multiple DVWA
-security levels, with impact analysis and
-OWASP-aligned remediation.
-
-</p>
-
-
-<div class="tags">
-
-<span class="tag">DVWA</span>
-
-<span class="tag">SQLI</span>
-
-<span class="tag">XSS</span>
-
-<span class="tag">COMMAND INJECTION</span>
-
-<span class="tag">OWASP</span>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- PROJECT 3 -->
-
-<article class="project">
-
-
-<div class="project-art">
-
-<span>
-
-03 / PENTESTING
-
-</span>
-
-<strong>
-
-PT
-
-</strong>
-
-</div>
-
-
-<div class="project-body">
-
-<h3>
-
-SME Penetration Testing Lab
-
-</h3>
-
-
-<p>
-
-Performed authorized reconnaissance with Nmap and Nikto,
-identified outdated services and associated CVEs,
-demonstrated controlled exploitation methodology with
-Metasploit, and produced a risk-rated remediation report.
-
-</p>
-
-
-<div class="tags">
-
-<span class="tag">NMAP</span>
-
-<span class="tag">NIKTO</span>
-
-<span class="tag">METASPLOIT</span>
-
-<span class="tag">CVEs</span>
-
-<span class="tag">RISK</span>
-
-</div>
-
-</div>
-
-</article>
-
-
-</div>
-
-</div>
-
+        </div>
+    </div>
 </section>
-
 
 
 <!-- =========================
@@ -1574,197 +1572,97 @@ Metasploit, and produced a risk-rated remediation report.
 ========================= -->
 
 <section id="skills">
-
-<div class="container">
-
-
-<div class="section-top">
-
-<div>
-
-<div class="eyebrow">
-
-03 / SECURITY ARSENAL
-
-</div>
-
-<h2 class="section-title">
-
-SUPERPOWERS
-
-</h2>
-
-</div>
-
-
-<p class="section-note">
-
-Tools and concepts used across my cybersecurity
-labs and learning projects.
-
-</p>
-
-</div>
-
-
-
-<div class="skills">
-
-
-<div class="skill">
-
-<div class="skill-number">
-
-01
-
-</div>
-
-<h3>
-
-SOC & THREAT DETECTION
-
-</h3>
-
-<p>
-
-Wazuh · Splunk · Microsoft Sentinel · Log Analysis ·
-Alert Triage · Correlation Rules · KQL
-
-</p>
-
-</div>
-
-
-
-<div class="skill">
-
-<div class="skill-number">
-
-02
-
-</div>
-
-<h3>
-
-PENETRATION TESTING
-
-</h3>
-
-<p>
-
-Nmap · Burp Suite · Metasploit · Nikto · Hydra ·
-SQLmap · WPScan · OWASP ZAP · Gobuster
-
-</p>
-
-</div>
-
-
-
-<div class="skill">
-
-<div class="skill-number">
-
-03
-
-</div>
-
-<h3>
-
-SECURITY ANALYSIS
-
-</h3>
-
-<p>
-
-Vulnerability Assessment · Ethical Hacking ·
-Incident Response · MITRE ATT&CK · OWASP Top 10 · CVSS
-
-</p>
-
-</div>
-
-
-
-<div class="skill">
-
-<div class="skill-number">
-
-04
-
-</div>
-
-<h3>
-
-NETWORKING
-
-</h3>
-
-<p>
-
-OSI & TCP/IP · IPv4/IPv6 Subnetting · Network Traffic
-Analysis · PCAP Analysis · Routers & Switches
-
-</p>
-
-</div>
-
-
-
-<div class="skill">
-
-<div class="skill-number">
-
-05
-
-</div>
-
-<h3>
-
-PROGRAMMING
-
-</h3>
-
-<p>
-
-Python · Bash · HTML · CSS · JavaScript
-
-</p>
-
-</div>
-
-
-
-<div class="skill">
-
-<div class="skill-number">
-
-06
-
-</div>
-
-<h3>
-
-ENVIRONMENTS
-
-</h3>
-
-<p>
-
-Kali Linux · Ubuntu · Windows · VirtualBox ·
-Git · GitHub · Android Pentesting
-
-</p>
-
-</div>
-
-
-</div>
-
-</div>
-
+    <div class="container">
+
+        <div class="section-top reveal">
+
+            <div>
+                <div class="eyebrow">03 / Technical Stack</div>
+                <h2 class="section-title">Tools I work with.</h2>
+            </div>
+
+            <p class="section-description">
+                A practical toolkit built through labs, projects,
+                certifications and continuous learning.
+            </p>
+
+        </div>
+
+        <div class="skills-grid">
+
+            <div class="skill-card reveal">
+                <div class="skill-head">
+                    <div class="skill-head-icon">◉</div>
+                    <h3>SOC & Threat Detection</h3>
+                </div>
+
+                <div class="skill-list">
+                    <span>Wazuh</span>
+                    <span>Microsoft Sentinel</span>
+                    <span>Splunk</span>
+                    <span>MITRE ATT&CK</span>
+                    <span>Incident Response</span>
+                    <span>Threat Detection</span>
+                </div>
+            </div>
+
+
+            <div class="skill-card reveal">
+                <div class="skill-head">
+                    <div class="skill-head-icon">⌕</div>
+                    <h3>Penetration Testing</h3>
+                </div>
+
+                <div class="skill-list">
+                    <span>Nmap</span>
+                    <span>Burp Suite</span>
+                    <span>Metasploit</span>
+                    <span>Nikto</span>
+                    <span>Gobuster</span>
+                    <span>SQLmap</span>
+                    <span>OWASP ZAP</span>
+                </div>
+            </div>
+
+
+            <div class="skill-card reveal">
+                <div class="skill-head">
+                    <div class="skill-head-icon">⌘</div>
+                    <h3>Systems & Networking</h3>
+                </div>
+
+                <div class="skill-list">
+                    <span>Linux</span>
+                    <span>Windows</span>
+                    <span>TCP/IP</span>
+                    <span>DNS</span>
+                    <span>SSH</span>
+                    <span>Wireshark</span>
+                    <span>VirtualBox</span>
+                </div>
+            </div>
+
+
+            <div class="skill-card reveal">
+                <div class="skill-head">
+                    <div class="skill-head-icon">‹/›</div>
+                    <h3>Programming & Web</h3>
+                </div>
+
+                <div class="skill-list">
+                    <span>Python</span>
+                    <span>Bash</span>
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                    <span>Git</span>
+                    <span>GitHub</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </section>
-
 
 
 <!-- =========================
@@ -1772,510 +1670,705 @@ Git · GitHub · Android Pentesting
 ========================= -->
 
 <section id="certifications">
-
-<div class="container">
-
-
-<div class="section-top">
-
-<div>
-
-<div class="eyebrow">
-
-04 / CREDENTIALS
-
-</div>
-
-<h2 class="section-title">
-
-CERTIFICATIONS
-
-</h2>
-
-</div>
-
-
-<p class="section-note">
-
-Selected certifications and cybersecurity training
-completed from 2025 onward.
-
-</p>
-
-</div>
-
-
-
-<div class="certs">
-
-
-<div class="cert">
-
-<div class="cert-num">
-
-01
-
-</div>
-
-<div>
-
-<strong>
-
-Certified Red Team Operations Management (CRTOM)
-
-</strong>
-
-<span>
-
-Red Team Leaders · December 2025
-
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="cert">
-
-<div class="cert-num">
-
-02
-
-</div>
-
-<div>
-
-<strong>
-
-Linux & Web Bug Bounty Bootcamp
-
-</strong>
-
-<span>
-
-CappricioSec University · March 2026
-
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="cert">
-
-<div class="cert-num">
-
-03
-
-</div>
-
-<div>
-
-<strong>
-
-Ethical Hacking Essentials (EHE)
-
-</strong>
-
-<span>
-
-EC-Council · October 2025
-
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="cert">
-
-<div class="cert-num">
-
-04
-
-</div>
-
-<div>
-
-<strong>
-
-Foundations of Cybersecurity
-
-</strong>
-
-<span>
-
-Google · August 2025
-
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="cert">
-
-<div class="cert-num">
-
-05
-
-</div>
-
-<div>
-
-<strong>
-
-Introduction to Cybersecurity
-
-</strong>
-
-<span>
-
-Cisco Networking Academy · July 2025
-
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="cert">
-
-<div class="cert-num">
-
-06
-
-</div>
-
-<div>
-
-<strong>
-
-Cybersecurity Management Job Simulation
-
-</strong>
-
-<span>
-
-ANZ & Forage · July 2025
-
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="cert">
-
-<div class="cert-num">
-
-07
-
-</div>
-
-<div>
-
-<strong>
-
-Cybersecurity Fundamentals
-
-</strong>
-
-<span>
-
-IBM SkillsBuild · June 2025
-
-</span>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
+    <div class="container">
+
+        <div class="section-top reveal">
+
+            <div>
+                <div class="eyebrow">04 / Credentials</div>
+                <h2 class="section-title">Learning in progress.</h2>
+            </div>
+
+            <p class="section-description">
+                Certifications and structured training supporting my
+                practical cybersecurity journey.
+            </p>
+
+        </div>
+
+        <div class="cert-list">
+
+            <div class="cert reveal">
+                <div class="cert-year">2026</div>
+                <div>
+                    <h3>Cisco Ethical Hacker</h3>
+                    <p>Cisco</p>
+                </div>
+                <div class="cert-badge">CERTIFIED</div>
+            </div>
+
+            <div class="cert reveal">
+                <div class="cert-year">2026</div>
+                <div>
+                    <h3>Linux & Web Bug Bounty Bootcamp</h3>
+                    <p>CappricioSec University</p>
+                </div>
+                <div class="cert-badge">TRAINING</div>
+            </div>
+
+            <div class="cert reveal">
+                <div class="cert-year">2025</div>
+                <div>
+                    <h3>Certified Red Team Operations Management</h3>
+                    <p>Red Team Leaders</p>
+                </div>
+                <div class="cert-badge">CERTIFIED</div>
+            </div>
+
+            <div class="cert reveal">
+                <div class="cert-year">2025</div>
+                <div>
+                    <h3>Ethical Hacking Essentials</h3>
+                    <p>EC-Council</p>
+                </div>
+                <div class="cert-badge">CERTIFIED</div>
+            </div>
+
+            <div class="cert reveal">
+                <div class="cert-year">2025</div>
+                <div>
+                    <h3>Google Foundations of Cybersecurity</h3>
+                    <p>Google</p>
+                </div>
+                <div class="cert-badge">CERTIFIED</div>
+            </div>
+
+            <div class="cert reveal">
+                <div class="cert-year">2025</div>
+                <div>
+                    <h3>IBM Cybersecurity Fundamentals</h3>
+                    <p>IBM</p>
+                </div>
+                <div class="cert-badge">CERTIFIED</div>
+            </div>
+
+            <div class="cert reveal">
+                <div class="cert-year">2025</div>
+                <div>
+                    <h3>Cisco Introduction to Cybersecurity</h3>
+                    <p>Cisco</p>
+                </div>
+                <div class="cert-badge">CERTIFIED</div>
+            </div>
+
+        </div>
+    </div>
 </section>
-
 
 
 <!-- =========================
-     LEARNING JOURNEY
+     JOURNEY
 ========================= -->
 
 <section>
+    <div class="container">
 
-<div class="container">
+        <div class="section-top reveal">
+            <div>
+                <div class="eyebrow">05 / Background</div>
+                <h2 class="section-title">The journey so far.</h2>
+            </div>
+        </div>
 
+        <div class="journey">
 
-<div class="section-top">
+            <div class="journey-card reveal">
 
-<div>
+                <h3>Education</h3>
 
-<div class="eyebrow">
+                <div class="timeline">
 
-05 / LEARNING JOURNEY
+                    <div class="timeline-item">
+                        <strong>Diploma in Cybersecurity</strong>
+                        <span>Blearn Academy · Bengaluru · 2025</span>
+                    </div>
 
-</div>
+                    <div class="timeline-item">
+                        <strong>B.Sc. Computer Science</strong>
+                        <span>Kannur University · 2021 – 2024</span>
+                    </div>
 
-<h2 class="section-title">
+                    <div class="timeline-item">
+                        <strong>Higher Secondary · Biology Science</strong>
+                        <span>2019 – 2021</span>
+                    </div>
 
-TRAJECTORY
+                </div>
 
-</h2>
+            </div>
 
-</div>
 
+            <div class="journey-card reveal">
 
-<p class="section-note">
+                <h3>Hands-on Practice</h3>
 
-Education, training and progression into practical
-cybersecurity work.
+                <div class="timeline">
 
-</p>
+                    <div class="timeline-item">
+                        <strong>Security Monitoring</strong>
+                        <span>Wazuh endpoint detection lab</span>
+                    </div>
 
-</div>
+                    <div class="timeline-item">
+                        <strong>Web Security</strong>
+                        <span>DVWA, OWASP vulnerabilities and testing</span>
+                    </div>
 
+                    <div class="timeline-item">
+                        <strong>Offensive Security</strong>
+                        <span>CTF machines and penetration testing labs</span>
+                    </div>
 
+                    <div class="timeline-item">
+                        <strong>Continuous Learning</strong>
+                        <span>TryHackMe, certifications and security research</span>
+                    </div>
 
-<div class="timeline">
+                </div>
 
+            </div>
 
-<div class="timeline-item">
-
-<div class="timeline-date">
-
-2026
-
-</div>
-
-<div>
-
-<h3>
-
-Advanced Cybersecurity Learning
-
-</h3>
-
-<p>
-
-Hands-on SOC, vulnerability assessment,
-penetration testing and security research.
-
-</p>
-
-</div>
-
-</div>
-
-
-
-<div class="timeline-item">
-
-<div class="timeline-date">
-
-2025
-
-</div>
-
-<div>
-
-<h3>
-
-Diploma in Cybersecurity
-
-</h3>
-
-<p>
-
-Blearn Academy, Bengaluru.
-
-</p>
-
-</div>
-
-</div>
-
-
-
-<div class="timeline-item">
-
-<div class="timeline-date">
-
-2021 — 2024
-
-</div>
-
-<div>
-
-<h3>
-
-B.Sc. Computer Science
-
-</h3>
-
-<p>
-
-MES College, Naravoor · Kannur University.
-
-</p>
-
-</div>
-
-</div>
-
-
-
-<div class="timeline-item">
-
-<div class="timeline-date">
-
-TRAINING
-
-</div>
-
-<div>
-
-<h3>
-
-CEH Training & CCNA Training
-
-</h3>
-
-<p>
-
-EC-Council · Cisco.
-
-</p>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
+        </div>
+    </div>
 </section>
-
 
 
 <!-- =========================
      CONTACT
 ========================= -->
 
-<section
-id="contact"
-class="contact">
+<section id="contact">
+    <div class="container">
 
-<div class="container">
+        <div class="contact-box reveal">
 
+            <div class="eyebrow">06 / Contact</div>
 
-<div class="contact-box">
+            <h2>Let's build something<br>secure.</h2>
 
+            <p>
+                Looking for an opportunity to begin my professional
+                cybersecurity career, contribute to a security team and
+                continue growing through real-world challenges.
+            </p>
 
-<div class="eyebrow">
+            <div class="contact-links">
 
-06 / CONTACT
+                <a href="mailto:ifazz550@gmail.com"
+                   class="btn btn-primary">
+                    Email Me
+                </a>
 
-</div>
+                <a href="https://www.linkedin.com/in/ifazm"
+                   target="_blank"
+                   class="btn btn-secondary">
+                    LinkedIn ↗
+                </a>
 
+                <a href="https://github.com/ifaaaaz"
+                   target="_blank"
+                   class="btn btn-secondary">
+                    GitHub ↗
+                </a>
 
-<h2>
+                <a href="https://tryhackme.com/p/Ifaz4"
+                   target="_blank"
+                   class="btn btn-secondary">
+                    TryHackMe ↗
+                </a>
 
-LET'S BUILD
+            </div>
 
-<br>
+        </div>
 
-<em>SECURE.</em>
-
-</h2>
-
-
-<p>
-
-Available for entry-level cybersecurity opportunities,
-internships and technical discussions around security
-labs and projects.
-
-</p>
-
-
-<div class="contact-links">
-
-
-<a
-class="btn btn-main"
-href="mailto:ifazz550@gmail.com">
-
-EMAIL ME ↗
-
-</a>
-
-
-<a
-class="btn"
-href="https://github.com/ifaaaaz"
-target="_blank">
-
-GITHUB ↗
-
-</a>
-
-
-<a
-class="btn"
-href="https://www.linkedin.com/in/ifazm"
-target="_blank">
-
-LINKEDIN ↗
-
-</a>
-
-
-<a
-class="btn"
-href="https://tryhackme.com/p/Ifaz4"
-target="_blank">
-
-TRYHACKME ↗
-
-</a>
-
-
-</div>
-
-</div>
-
-</div>
-
+    </div>
 </section>
-
 
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
+    <div class="container">
 
-© 2026 Mohammed Ifaz M · Cybersecurity Portfolio · GitHub Pages
+        <div class="footer-inner">
 
+            <p>
+                © 2026 Mohammed Ifaz M. Built with curiosity and caffeine.
+            </p>
+
+            <div class="footer-links">
+                <a href="#home">Back to top ↑</a>
+                <a href="mailto:ifazz550@gmail.com">Email</a>
+                <a href="https://github.com/ifaaaaz" target="_blank">GitHub</a>
+            </div>
+
+        </div>
+
+    </div>
 </footer>
 
+
+<!-- =========================
+     PROJECT DETAIL MODAL
+========================= -->
+
+<div class="modal" id="projectModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div>
+                <div class="eyebrow" id="modalCategory"></div>
+                <h2 class="section-title" id="modalTitle"></h2>
+            </div>
+
+            <button class="modal-close" onclick="closeProject()">
+                ×
+            </button>
+
+        </div>
+
+        <div class="modal-content" id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   PROJECT DATA
+========================= */
+
+const projects = {
+
+    wazuh: {
+
+        category: "SOC / SECURITY MONITORING",
+
+        title: "Real-Time Endpoint Monitoring",
+
+        content: `
+
+            <p>
+                A hands-on cybersecurity lab designed to simulate a small
+                Security Operations environment using Wazuh for endpoint
+                monitoring, security event detection and alert investigation.
+            </p>
+
+            <div class="detail-grid">
+
+                <div class="detail-box">
+                    <small>Platform</small>
+                    <strong>VirtualBox</strong>
+                </div>
+
+                <div class="detail-box">
+                    <small>SIEM / XDR</small>
+                    <strong>Wazuh 4.12</strong>
+                </div>
+
+                <div class="detail-box">
+                    <small>Endpoint</small>
+                    <strong>Windows 11</strong>
+                </div>
+
+            </div>
+
+            <h4>Objective</h4>
+
+            <p>
+                Build a controlled environment where endpoint activity could
+                be monitored, security events generated and alerts investigated
+                using a real security monitoring platform.
+            </p>
+
+            <h4>Environment</h4>
+
+            <ul>
+                <li>Wazuh Server 4.12 all-in-one deployment</li>
+                <li>Windows 11 endpoint with Wazuh agent</li>
+                <li>Kali Linux security testing machine</li>
+                <li>VirtualBox virtualized lab environment</li>
+            </ul>
+
+            <h4>What I Implemented</h4>
+
+            <ul>
+                <li>Configured and connected a Windows endpoint to Wazuh.</li>
+                <li>Monitored endpoint security events and authentication activity.</li>
+                <li>Performed controlled Nmap reconnaissance from Kali.</li>
+                <li>Simulated SSH brute-force activity in the lab.</li>
+                <li>Investigated generated alerts and related event information.</li>
+                <li>Mapped relevant activity to MITRE ATT&CK techniques.</li>
+            </ul>
+
+            <h4>Detection Example</h4>
+
+            <p>
+                Authentication-related activity generated security alerts
+                including Event ID 4624 and Wazuh rule information associated
+                with Valid Accounts (MITRE ATT&CK T1078).
+            </p>
+
+            <h4>Tools</h4>
+
+            <div class="tags">
+                <span class="tag">Wazuh</span>
+                <span class="tag">Windows 11</span>
+                <span class="tag">Kali Linux</span>
+                <span class="tag">Nmap</span>
+                <span class="tag">VirtualBox</span>
+                <span class="tag">MITRE ATT&CK</span>
+            </div>
+
+        `
+    },
+
+
+    dvwa: {
+
+        category: "WEB APPLICATION SECURITY",
+
+        title: "DVWA Vulnerability Assessment",
+
+        content: `
+
+            <p>
+                A controlled web application security assessment using
+                Damn Vulnerable Web Application (DVWA) to understand,
+                identify and document common web vulnerabilities.
+            </p>
+
+            <div class="detail-grid">
+
+                <div class="detail-box">
+                    <small>Target</small>
+                    <strong>DVWA</strong>
+                </div>
+
+                <div class="detail-box">
+                    <small>Focus</small>
+                    <strong>OWASP Top 10</strong>
+                </div>
+
+                <div class="detail-box">
+                    <small>Type</small>
+                    <strong>Web Assessment</strong>
+                </div>
+
+            </div>
+
+            <h4>Objective</h4>
+
+            <p>
+                Practice identifying common web application weaknesses in a
+                safe laboratory environment and understand how insecure input
+                handling can lead to security issues.
+            </p>
+
+            <h4>Assessment Areas</h4>
+
+            <ul>
+                <li>SQL Injection</li>
+                <li>Command Injection</li>
+                <li>Reflected Cross-Site Scripting</li>
+                <li>Input validation weaknesses</li>
+                <li>OWASP Top 10 concepts</li>
+            </ul>
+
+            <h4>Methodology</h4>
+
+            <ul>
+                <li>Identified application functionality and attack surfaces.</li>
+                <li>Tested user-controlled input fields.</li>
+                <li>Observed application responses to crafted input.</li>
+                <li>Validated vulnerabilities within the controlled lab.</li>
+                <li>Documented findings and security impact.</li>
+                <li>Prepared an assessment report with remediation concepts.</li>
+            </ul>
+
+            <h4>Security Learning</h4>
+
+            <p>
+                The project provided practical experience with web attack
+                surfaces, input validation, application behaviour and the
+                importance of secure development practices.
+            </p>
+
+            <h4>Tools</h4>
+
+            <div class="tags">
+                <span class="tag">DVWA</span>
+                <span class="tag">Burp Suite</span>
+                <span class="tag">OWASP</span>
+                <span class="tag">Kali Linux</span>
+                <span class="tag">SQL Injection</span>
+                <span class="tag">XSS</span>
+            </div>
+
+        `
+    },
+
+
+    pentest: {
+
+        category: "OFFENSIVE SECURITY",
+
+        title: "SME Penetration Testing Lab",
+
+        content: `
+
+            <p>
+                A controlled penetration testing laboratory designed to
+                simulate the workflow of assessing a small business-style
+                environment from reconnaissance through vulnerability
+                identification and controlled exploitation.
+            </p>
+
+            <div class="detail-grid">
+
+                <div class="detail-box">
+                    <small>Approach</small>
+                    <strong>Black-box Style</strong>
+                </div>
+
+                <div class="detail-box">
+                    <small>Focus</small>
+                    <strong>Network Security</strong>
+                </div>
+
+                <div class="detail-box">
+                    <small>Environment</small>
+                    <strong>Isolated Lab</strong>
+                </div>
+
+            </div>
+
+            <h4>Objective</h4>
+
+            <p>
+                Develop practical experience with reconnaissance, enumeration,
+                service discovery, vulnerability identification and controlled
+                exploitation.
+            </p>
+
+            <h4>Reconnaissance</h4>
+
+            <ul>
+                <li>Performed network discovery using Nmap.</li>
+                <li>Enumerated exposed services and ports.</li>
+                <li>Identified application and service versions.</li>
+                <li>Used Nikto for web server assessment.</li>
+            </ul>
+
+            <h4>Vulnerability Assessment</h4>
+
+            <p>
+                The lab included intentionally vulnerable or outdated services
+                such as Apache and OpenSSH. These were reviewed to understand
+                potential security exposure and attack paths.
+            </p>
+
+            <h4>Controlled Exploitation</h4>
+
+            <ul>
+                <li>Used Metasploit in the isolated laboratory.</li>
+                <li>Studied the EternalBlue vulnerability, CVE-2017-0144.</li>
+                <li>Validated the security impact within the lab.</li>
+                <li>Documented findings and potential mitigations.</li>
+            </ul>
+
+            <h4>Tools</h4>
+
+            <div class="tags">
+                <span class="tag">Nmap</span>
+                <span class="tag">Nikto</span>
+                <span class="tag">Metasploit</span>
+                <span class="tag">Kali Linux</span>
+                <span class="tag">Enumeration</span>
+                <span class="tag">Vulnerability Assessment</span>
+            </div>
+
+        `
+    }
+
+};
+
+
+/* =========================
+   PROJECT MODAL
+========================= */
+
+function openProject(projectName) {
+
+    const project = projects[projectName];
+
+    if (!project) return;
+
+    document.getElementById("modalCategory").textContent =
+        project.category;
+
+    document.getElementById("modalTitle").textContent =
+        project.title;
+
+    document.getElementById("modalContent").innerHTML =
+        project.content;
+
+    document.getElementById("projectModal")
+        .classList.add("active");
+
+    document.body.classList.add("modal-open");
+}
+
+
+function closeProject() {
+
+    document.getElementById("projectModal")
+        .classList.remove("active");
+
+    document.body.classList.remove("modal-open");
+}
+
+
+document.getElementById("projectModal")
+    .addEventListener("click", function(e) {
+
+        if (e.target === this) {
+            closeProject();
+        }
+
+    });
+
+
+document.addEventListener("keydown", function(e) {
+
+    if (e.key === "Escape") {
+        closeProject();
+    }
+
+});
+
+
+/* =========================
+   MOBILE NAVIGATION
+========================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+
+    navLinks.classList.toggle("open");
+
+});
+
+
+document.querySelectorAll(".nav-links a")
+    .forEach(link => {
+
+        link.addEventListener("click", () => {
+            navLinks.classList.remove("open");
+        });
+
+    });
+
+
+/* =========================
+   ACTIVE NAVIGATION
+========================= */
+
+const sections = document.querySelectorAll("section[id]");
+const navItems = document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 160;
+
+        if (window.scrollY >= sectionTop) {
+            current = section.getAttribute("id");
+        }
+
+    });
+
+    navItems.forEach(link => {
+
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+        }
+
+    });
+
+});
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const observer = new IntersectionObserver(
+    entries => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+
+        });
+
+    },
+    {
+        threshold: .12
+    }
+);
+
+
+document.querySelectorAll(".reveal")
+    .forEach(element => observer.observe(element));
+
+
+/* =========================
+   SMOOTH BUTTON FEEDBACK
+========================= */
+
+document.querySelectorAll('a[href^="#"]')
+    .forEach(anchor => {
+
+        anchor.addEventListener("click", function(e) {
+
+            const target = document.querySelector(
+                this.getAttribute("href")
+            );
+
+            if (target) {
+
+                e.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            }
+
+        });
+
+    });
+
+</script>
 
 </body>
 </html>
